@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup(entry_points = {
-        "distutils.commands": [
-           "install = setupthrift:thrift_install",
-        ],
-        "distutils.setup_keywords": [
-            "thrift_root = setupthrift:thrift_root",
-        ],
-      },
-      modules=['setupthrift'],
+setup(name='setupthrift',
       version='0.1',
-      name='setupthrift')
+      packages=find_packages(),
+      entry_points = {
+        "distutils.commands": [
+           "thrift = setupthrift.command:CompileThrift",
+           "install = setupthrift.command:ThriftInstall",
+           "develop = setupthrift.command:ThriftDevelop"
+        ]
+      }
+)
